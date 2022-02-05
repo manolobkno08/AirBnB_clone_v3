@@ -30,6 +30,6 @@ def Stats_code():
         return_dict[key] = storage.count(value)
     return jsonify(return_dict)
 
+
 if __name__ == '__main__':
     pass
-    
