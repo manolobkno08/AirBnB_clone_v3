@@ -20,7 +20,8 @@ def close(self):
 
 if __name__ == '__main__':
     if 'HBNB_API_HOST' and 'HBNB_API_PORT':
-        app.run(host=os.getenv('HBNB_API_HOST'), port=int(os.getenv('HBNB_API_PORT')),
+        app.run(host=os.getenv('HBNB_API_HOST'),
+                port=int(os.getenv('HBNB_API_PORT')),
                 threaded=True, debug=True)
     else:
         app.run(host='0.0.0.0', port='5000', threaded=True, debug=True)
