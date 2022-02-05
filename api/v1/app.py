@@ -2,7 +2,7 @@
 
 """Start Flask API"""
 
-from flask import Flask
+from flask import Flask, make_response
 import os
 from models import storage
 from api.v1.views import app_views
@@ -16,6 +16,11 @@ app.register_blueprint(app_views)
 def close(self):
     """Close session"""
     storage.close()
+
+
+@app.errorhandler(404)
+def page_404(error):
+    return make_response(jsonify({'error': 'Not Found'}), 404)
 
 
 if __name__ == '__main__':
