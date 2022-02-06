@@ -20,6 +20,7 @@ def close(self):
 
 @app.errorhandler(404)
 def page_404(error):
+    """Not found page in json"""
     return make_response(jsonify({'error': 'Not Found'}), 404)
 
 
