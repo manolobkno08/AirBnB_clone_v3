@@ -15,7 +15,7 @@ def states_get():
     return jsonify(states)
 
 
-@app.views.route('/syayes/<string:state_id>', methods=['GET'],
+@app.views.route('/states/<string:state_id>', methods=['GET'],
                  strict_slashes=False)
 def states_get(state_id):
     state = storage.get("State", state_id)
