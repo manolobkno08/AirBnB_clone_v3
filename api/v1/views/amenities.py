@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""new view for Amenity objects that handles all default RESTFul API actions"""
+"""new view for Amenity objects"""
 
 from api.v1.views import app_views
 from flask import jsonify, abort, request
@@ -63,4 +63,4 @@ def update_amenity(amenity_id):
         if key not in ['id', 'created_at', 'updated_at']:
             setattr(amenity, key, val)
     amenity.save()
-    return jsonify(amenity.to dict()), 200
+    return jsonify(amenity.to_dict()), 200
