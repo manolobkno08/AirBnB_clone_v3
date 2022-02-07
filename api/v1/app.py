@@ -2,7 +2,7 @@
 
 """Start Flask API"""
 
-from flask import Flask
+from flask import Flask, jsonify, make_response
 import os
 from models import storage
 from api.v1.views import app_views
@@ -18,8 +18,14 @@ def close(self):
     storage.close()
 
 
+@app.errorhandler(404)
+def not_found(error):
+    """Return 404 response"""
+    return make_response(jsonify({"error": "Not found"}), 404)
+
+
 if __name__ == '__main__':
-    if 'HBNB_API_HOST' and 'HBNB_API_PORT':
+    if os.getenv('HBNB_API_HOST') and os.getenv('HBNB_API_PORT'):
         app.run(host=os.getenv('HBNB_API_HOST'),
                 port=int(os.getenv('HBNB_API_PORT')),
                 threaded=True, debug=True)
