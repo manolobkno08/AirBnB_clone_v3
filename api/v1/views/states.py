@@ -57,6 +57,10 @@ def delete_state(state_id):
     state = storage.get(State, state_id)
     if not state:
         abort(404)
-    storage.delete(state)
-    storage.save()
-    return jsonify({}), 200
+    if not request.get_json():
+        return make_response(jsonify({'error': 'Not a JSON'}), 400)
+    for attr, val in request.get_json().items():
+        if attr not in ['id', 'created_at', 'updated_at']:
+            setattr(state, attr, val)
+    state.save()
+    return jsonify(state.to_dict())
